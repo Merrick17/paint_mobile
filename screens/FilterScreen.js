@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   AppRegistry,
   StyleSheet,
@@ -6,29 +6,33 @@ import {
   View,
   Image,
   Dimensions,
-  Alert
+  Alert,
 } from 'react-native';
 
 import RNSketchCanvas from '@terrylinla/react-native-sketch-canvas';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { addProjectApi } from '../store/projects/actions';
+import {useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
+import {addProjectApi} from '../store/projects/actions';
 //
-const FilterScreen = ({ navigation, route }) => {
+const FilterScreen = ({navigation, route}) => {
   const [image, setImage] = useState(null);
-  const dispatch = useDispatch() ; 
-  const {user} = useSelector((state) => state.authReducer)
-  const getName = (path) => {
-    let index = path.lastIndexOf('/');
-    let name = path.substring(index, path.length);
-    return name;
-  }
+  const dispatch = useDispatch();
+  const {user} = useSelector(state => state.authReducer);
+  const getName = path => {
+    if (path) {
+      let index = path.lastIndexOf('/');
+      let name = path.substring(index, path.length);
+      return name;
+    } else {
+      return '';
+    }
+  };
   useEffect(() => {
     console.log('Params', route.params.img);
   }, []);
   return (
     <View style={styles.container}>
-      <View style={{ flex: 1, flexDirection: 'row' }}>
+      <View style={{flex: 1, flexDirection: 'row'}}>
         <Image
           source={{
             uri: route.params.img,
@@ -43,40 +47,40 @@ const FilterScreen = ({ navigation, route }) => {
           }}
         />
         <RNSketchCanvas
-          containerStyle={{ backgroundColor: 'transparent', flex: 1, zIndex: 2 }}
-          canvasStyle={{ backgroundColor: 'transparent', flex: 1 }}
+          containerStyle={{backgroundColor: 'transparent', flex: 1, zIndex: 2}}
+          canvasStyle={{backgroundColor: 'transparent', flex: 1}}
           defaultStrokeIndex={0}
           defaultStrokeWidth={100}
           closeComponent={
             <View style={styles.functionButton}>
-              <Text style={{ color: 'white' }}>Fermer</Text>
+              <Text style={{color: 'white'}}>Fermer</Text>
             </View>
           }
           undoComponent={
             <View style={styles.functionButton}>
-              <Text style={{ color: 'white' }}>Annuler</Text>
+              <Text style={{color: 'white'}}>Annuler</Text>
             </View>
           }
           clearComponent={
             <View style={styles.functionButton}>
-              <Text style={{ color: 'white' }}>{`Annuler \n tous`}</Text>
+              <Text style={{color: 'white'}}>{`Annuler \n tous`}</Text>
             </View>
           }
           eraseComponent={
             <View style={styles.functionButton}>
-              <Text style={{ color: 'white' }}>Effacer</Text>
+              <Text style={{color: 'white'}}>Effacer</Text>
             </View>
           }
           strokeComponent={color => (
             <View
-              style={[{ backgroundColor: color }, styles.strokeColorButton]}
+              style={[{backgroundColor: color}, styles.strokeColorButton]}
             />
           )}
           strokeSelectedComponent={(color, index, changed) => {
             return (
               <View
                 style={[
-                  { backgroundColor: color, borderWidth: 2 },
+                  {backgroundColor: color, borderWidth: 2},
                   styles.strokeColorButton,
                 ]}
               />
@@ -99,7 +103,7 @@ const FilterScreen = ({ navigation, route }) => {
           }}
           saveComponent={
             <View style={styles.functionButton}>
-              <Text style={{ color: 'white' }}> projet</Text>
+              <Text style={{color: 'white'}}> projet</Text>
             </View>
           }
           savePreference={() => {
@@ -110,35 +114,40 @@ const FilterScreen = ({ navigation, route }) => {
               transparent: false,
               imageType: 'png',
             };
-            setImage(img)
+            setImage(img);
             return img;
           }}
           onSketchSaved={(result, path) => {
-            console.log("RESULT", result)
+            console.log('RESULT', route.params.img);
             console.log(path);
             let background = {
-              uri: route.params.img,             // e.g. 'file:///path/to/file/image123.jpg'
-              name: getName(route.params.img),            // e.g. 'image123.jpg',
-              type: 'image/jpg'
-            }
+              uri: route.params.img, // e.g. 'file:///path/to/file/image123.jpg'
+              name: getName(route.params.img), // e.g. 'image123.jpg',
+              type: 'image/jpg',
+            };
             let image = {
               uri: path,
               name: getName(path),
-              type: 'image/png'
-            }
+              type: 'image/png',
+            };
             let formData = new FormData();
             formData.append('image', image);
             formData.append('background', background);
-            formData.append('nameProject', `new_project${Date.now().toString()}`);
-            formData.append('owner',user._id); 
-            console.log("FORM DATA",formData) ; 
-            dispatch(addProjectApi(formData)) ; 
-            Alert.alert('Success', 'Votre projét à été enregistrer', [{
-              text: 'OK',
-              onPress: () => {
-                navigation.pop();
-              }
-            }])
+            formData.append(
+              'nameProject',
+              `new_project${Date.now().toString()}`,
+            );
+            formData.append('owner', user._id);
+            console.log('FORM DATA', formData);
+            dispatch(addProjectApi(formData));
+            Alert.alert('Success', 'Votre projét à été enregistrer', [
+              {
+                text: 'OK',
+                onPress: () => {
+                  navigation.pop();
+                },
+              },
+            ]);
           }}
         />
       </View>

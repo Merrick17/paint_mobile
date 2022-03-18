@@ -21,7 +21,7 @@ const DrawerContent = props => {
         <View style={styles.drawerContent}>
           <View style={styles.userInfoSection}>
             <View style={{ flexDirection: 'row', marginTop: 15 }}>
-              <Image source={require('../assets/imgs/mca.png')} style={{resizeMode:'contain',width:200}}/>
+              <Image source={require('../assets/imgs/mca.png')} style={{resizeMode:'contain',width:230}}/>
 
             </View>
           </View>
@@ -32,20 +32,20 @@ const DrawerContent = props => {
             <DrawerItem label="Mes projets" onPress={() => {
               props.navigation.navigate('Project')
             }} />
-            <DrawerItem label="Mon Profil" />
-            <DrawerItem label="Deconnexion" />
+            
+            
           </Drawer.Section>
-          <Drawer.Section style={styles.drawerSection} title="MCA">
+          <Drawer.Section style={styles.drawerSection} title="MCA+">
             <DrawerItem label="A PROPOS" onPress={() => {
-              console.log("Hello")
+              console.log("cc")
               props.navigation.navigate('About')
             }} />
             <DrawerItem label="Produits" onPress={() => {
-              console.log("Hello")
+              console.log("cc")
               props.navigation.navigate('Product')
             }} />
             <DrawerItem label="Couleurs" onPress={() => {
-              console.log("Hello")
+              console.log("cc")
               props.navigation.navigate('Colors')
             }} />
             <DrawerItem label="Estimation" onPress={() => {
@@ -54,7 +54,11 @@ const DrawerContent = props => {
             <DrawerItem label="Devis" onPress={() => {
               props.navigation.navigate('Devis')
             }} />
+           
           </Drawer.Section>
+          <Drawer.Section>
+          <DrawerItem label="Deconnexion" />
+            </Drawer.Section>
         </View>
       </DrawerContentScrollView>
     </View>

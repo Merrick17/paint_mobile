@@ -6,6 +6,7 @@ export const addProjectApi = (payload) => async dispatch => {
 
         let result = await post('project/addproject', payload);
         console.log("RESULT PORJECT", result);
+       // dispatch()
     } catch (error) {
         console.log("error", error);
     }
