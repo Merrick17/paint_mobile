@@ -16,7 +16,7 @@ const MainScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const actions = [
     {
-      text: "Crée un Projet",
+      text: "Caméra",
       name: "project",
       position: 2
     },

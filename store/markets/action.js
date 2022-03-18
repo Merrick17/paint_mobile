@@ -1,4 +1,3 @@
- 
 import {get} from '../../helpers/apiHelpers' 
 export const getAllMarkets = (data) => {
     return {
@@ -10,6 +9,7 @@ export const getAllMarkets = (data) => {
 export const getAllMarketsApi = (config)=>async dispatch=>{
     try {
         let result = await get('magasins/',config); 
+        dispatch(getAllMarkets(result.message))
         console.log(result) ; 
     } catch (error) {
         

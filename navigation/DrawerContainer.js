@@ -4,7 +4,6 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import DrawerContent from '../screens/DrawerContent';
 import SettingsScreen from '../screens/SettingsScreen';
 import MainScreen from '../screens/MainScreen';
-import CartScreen from '../screens/CartScreen';
 import ProductScreen from '../screens/ProductScreen';
 import { createStackNavigator } from '@react-navigation/stack';
 import TendanceDetails from '../screens/TendanceDetails';
@@ -41,7 +40,6 @@ const DrawerContainer = () => {
       drawerContent={props => <DrawerContent {...props} />}
       independent={true}>
       <Drawer.Screen name="Accueil" component={Tendances} />
-      <Drawer.Screen name="Panier" component={CartScreen} />
       <Drawer.Screen name="Profile" component={SettingsScreen} />
       <Drawer.Screen name="Product" component={ProductScreen} />
       <Drawer.Screen name="Colors" component={ColorsScreen} />

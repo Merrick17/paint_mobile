@@ -33,8 +33,6 @@ const ColorsScreen = props => {
         dispatch(getAllColorssapi(config));
         console.log("working")
     }, [])
-    //console.log('My Products', state.productsReducer);
-
     return (
         <View style={GlobalStyles.maincreen}>
             <NavBar
